@@ -7,6 +7,7 @@ import authRouter from './routes/auth';
 import './config/passport';
 import passport from 'passport';
 import { isAuthenticated } from './middleware/isAuthenticated';
+import fileRoutes from './routes/fileRoutes';
 
 dotenv.config();
 
@@ -19,11 +20,17 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'your_secret',
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        sameSite: 'lax'
+    }
   }));
   
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/api/files', fileRoutes)
 app.use('/auth', authRouter);
 
 // Home page
