@@ -164,3 +164,34 @@ export const searchFiles = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Search failed' });
     }
 };
+
+export const shareFile = async (req: Request, res: Response) => {
+    const fileId = req.params.id;
+
+    try {
+        const file = await File.findById(fileId);
+
+        if (!file) {
+            res.status(404).json({ error: 'File not found' });
+            return;
+        }
+
+        // Only owner can share
+        if (String(file.owner) !== String(req.user?._id)) {
+            res.status(403).json({ error: 'Unauthorized' });
+            return;
+        }
+        
+        if (!file.s3Key) {
+            res.status(400).json({ error: 'Invalid file: missing S3 key' });
+            return;
+        }
+
+        const signedUrl = await generatePresignedURL(file.s3Key);
+
+        res.status(200).json({ url: signedUrl });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Could not generate share URL' });
+    }
+}
