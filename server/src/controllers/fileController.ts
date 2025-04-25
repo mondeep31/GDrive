@@ -114,4 +114,53 @@ export const deleteFile = async (req: Request, res: Response) => {
     }
   };
   
+export const renameFile = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { newName } = req.body;
+    const user = req.user!;
 
+    if (!newName || newName.trim() === '') {
+        res.status(400).json({ error: 'New name is required' });
+        return;
+    }
+
+    try {
+        const file = await File.findOne({ _id: id, owner: user.id });
+
+        if (!file) {
+            res.status(404).json({ error: 'File not found or unauthorized' });
+            return;
+        }
+
+        file.name = newName;
+        await file.save();
+
+        res.status(200).json({ message: 'File renamed successfully', file });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Rename failed' });
+        return;
+    }
+};
+
+export const searchFiles = async (req: Request, res: Response) => {
+    const { query } = req.query;
+    const user = req.user!;
+
+    if (!query || typeof query !== 'string') {
+        res.status(400).json({ error: 'Search query is required' });
+        return;
+    }
+
+    try {
+        const files = await File.find({
+            owner: user.id,
+            name: { $regex: query, $options: 'i' } // case-insensitive partial match
+        }).sort({ createdAt: -1 });
+
+        res.status(200).json({ files });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Search failed' });
+    }
+};
