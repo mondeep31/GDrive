@@ -26,7 +26,7 @@ app.use(session({
 
         secure: true,
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: 'none'
     }
   }));
   
