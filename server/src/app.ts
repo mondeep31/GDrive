@@ -51,9 +51,11 @@ app.get("/", (req, res) => {
     `);
 });
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
 app.get('/login', (req, res) => {
     if (req.isAuthenticated()) {
-        return res.redirect('http://localhost:5173/dashboard');
+        return res.redirect(`${FRONTEND_URL}/dashboard`);
     }
     res.send(`
         <h1>Login</h1>

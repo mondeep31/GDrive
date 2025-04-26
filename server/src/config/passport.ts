@@ -9,16 +9,20 @@ dotenv.config();
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const CALLBACK_URL = process.env.CALLBACK_URL;
 
 if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET){
     throw new Error('Missing Google OAuth credentials in environment variables')
 }
 
+if (!CALLBACK_URL){
+    throw new Error('Missing Callback URL in environment variables')
+}
 
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: 'http://localhost:5000/auth/google/callback',
+  callbackURL: CALLBACK_URL,
   passReqToCallback: true,
 },
   async function(request: Request, accessToken: string, refreshToken: string, profile: any, done: any) {

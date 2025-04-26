@@ -21,9 +21,10 @@ const Login = () => {
               variant="primary"
               fullWidth
               onClick={() =>
-                (window.location.href = "http://localhost:5000/auth/google")
+                (window.location.href = `${
+                  import.meta.env.VITE_AXIOS_BASE_URL
+                }/auth/google`)
               }
-              //   disabled={isLoading}
               className="justify-center py-3"
             >
               Sign in with Google
