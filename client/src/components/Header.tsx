@@ -38,7 +38,7 @@ const Header = ({
   // Fetch user info on mount
   useEffect(() => {
     axios
-      .get("/auth/me", { withCredentials: true })
+      .get("/api/user", { withCredentials: true })
       .then((res) => {
         if (res.data.user && res.data.user.email) {
           setUserEmail(res.data.user.email);

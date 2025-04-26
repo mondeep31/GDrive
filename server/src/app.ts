@@ -11,6 +11,7 @@ import fileRoutes from './routes/fileRoutes';
 
 dotenv.config();
 
+
 const app = express();
 
 app.use(express.json())
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(CORS_CONFIG));
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your_secret',
     resave: false,
@@ -45,7 +47,16 @@ app.get("/", (req, res) => {
     `);
 });
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+app.get('/api/user', (req, res) => {
+    if (req.isAuthenticated()) {
+      res.status(200).json({ user: req.user });
+    } else {
+      res.status(401).json({ message: 'Not authenticated' });
+    }
+  });
+  
+
+
 
 app.get('/login', (req, res) => {
     if (req.isAuthenticated()) {
