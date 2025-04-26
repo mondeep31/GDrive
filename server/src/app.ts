@@ -23,8 +23,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        // secure: process.env.NODE_ENV === "production",
-        secure: false,
+
+        secure: true,
         httpOnly: true,
         sameSite: 'lax'
     }
@@ -41,13 +41,7 @@ app.get
 // Home page
 app.get("/", (req, res) => {
     res.send(`
-        <h1>Welcome to TwoSpoon Drive</h1>
-        <div>
-            ${req.isAuthenticated() 
-                ? '<a href="/dashboard">Go to Dashboard</a><br><a href="/auth/logout">Logout</a>'
-                : '<a href="/auth/google">Login with Google</a>'
-            }
-        </div>
+        <h1>This is the backend</h1>
     `);
 });
 
@@ -61,13 +55,6 @@ app.get('/login', (req, res) => {
         <h1>Login</h1>
         <a href="/auth/google">Login with Google</a>
     `);
-});
-
-
-
-// Protected route example
-app.get('/protected', isAuthenticated, (req, res) => {
-    res.send("This is the protected route");
 });
 
 
