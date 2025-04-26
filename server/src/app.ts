@@ -14,6 +14,8 @@ dotenv.config();
 const app = express();
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors(CORS_CONFIG));
 
 app.use(session({
@@ -21,7 +23,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === "production",
+        // secure: process.env.NODE_ENV === "production",
+        secure: false,
         httpOnly: true,
         sameSite: 'lax'
     }
@@ -32,6 +35,8 @@ app.use(passport.session());
 
 app.use('/api/files', fileRoutes)
 app.use('/auth', authRouter);
+
+app.get
 
 // Home page
 app.get("/", (req, res) => {
@@ -48,7 +53,7 @@ app.get("/", (req, res) => {
 
 app.get('/login', (req, res) => {
     if (req.isAuthenticated()) {
-        return res.redirect('/dashboard');
+        return res.redirect('http://localhost:5173/dashboard');
     }
     res.send(`
         <h1>Login</h1>
@@ -56,21 +61,7 @@ app.get('/login', (req, res) => {
     `);
 });
 
-// Dashboard page (protected route)
-app.get('/dashboard', isAuthenticated, (req, res) => {
-    const user = req.user;
-    res.send(`
-        <h1>Welcome to your Dashboard</h1>
-        <p>User: ${user?.name}</p>
-        <p>Email: ${user?.email}</p>
-        <div>
-            <h2>Your Files</h2>
-            <!-- Add file list here -->
-            <p>File management features coming soon...</p>
-        </div>
-        <a href="/auth/logout">Logout</a>
-    `);
-});
+
 
 // Protected route example
 app.get('/protected', isAuthenticated, (req, res) => {

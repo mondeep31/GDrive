@@ -195,3 +195,34 @@ export const shareFile = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Could not generate share URL' });
     }
 }
+
+export const downloadFile = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = req.user!;
+
+  try {
+    const file = await File.findOne({ _id: id, owner: user.id });
+    if (!file) {
+      res.status(404).json({ error: 'File not found or unauthorized' });
+      return;
+    }
+    if (!file.s3Key) {
+      res.status(400).json({ error: 'Invalid file: missing S3 key' });
+      return;
+    }
+
+    // Get the file stream from S3
+    const params = {
+      Bucket: process.env.S3_BUCKET_NAME!,
+      Key: file.s3Key,
+    };
+    const s3Stream = s3.getObject(params).createReadStream();
+
+    res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
+    res.setHeader('Content-Type', 'application/octet-stream');
+    s3Stream.pipe(res);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Download failed' });
+  }
+};

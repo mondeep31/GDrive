@@ -10,9 +10,13 @@ authRouter.get('/google', passport.authenticate('google', {
 authRouter.get('/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/login',
-    successRedirect: '/dashboard',
+    successRedirect: 'http://localhost:5173/dashboard',
   })
 );
+
+authRouter.get('/me', (req, res) => {
+  res.json({ isAuthenticated: req.isAuthenticated(), user: req.user });
+});
 
 authRouter.get('/logout', (req: Request, res: Response) => {
   req.logout((err) => {
