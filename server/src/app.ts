@@ -17,6 +17,8 @@ const app = express();
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 // console.log("app.ts FE URL", FRONTEND_URL)
 
+app.set('trust proxy', 1);
+
 const CORS_CONFIG = {
     origin: ["http://localhost:5173", FRONTEND_URL],
     credentials: true,
