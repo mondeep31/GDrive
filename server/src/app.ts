@@ -15,6 +15,7 @@ dotenv.config();
 const app = express();
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+// console.log("app.ts FE URL", FRONTEND_URL)
 
 const CORS_CONFIG = {
     origin: ["http://localhost:5173", FRONTEND_URL],
@@ -46,7 +47,7 @@ app.use(passport.session());
 app.use('/api/files', fileRoutes)
 app.use('/auth', authRouter);
 
-app.get
+
 
 // Home page
 app.get("/", (req, res) => {
