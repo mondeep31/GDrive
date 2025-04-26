@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const mongoDB_URI: string | undefined = process.env.MONGODB_URI
-console.log(mongoDB_URI)
+
 const connectDB = async () => {
     try {
 

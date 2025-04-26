@@ -13,8 +13,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET){
     throw new Error('Missing Google OAuth credentials in environment variables')
 }
-console.log('Client ID:', GOOGLE_CLIENT_ID); // Temporary for debugging
-console.log('Callback URL:', "http://localhost:5000/auth/google/callback"); // Temporary for debugging
+
 
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
