@@ -4,17 +4,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import {
-  Home,
-  FileText,
-  Image as ImageIcon,
-  File as FileIcon,
-  Folder,
-  LayoutGrid,
-  List as ListIcon,
-} from "lucide-react";
-import PdfIcon from "../components/icons/PdfIcon";
-import DocIcon from "../components/icons/DocIcon";
+import { Home, LayoutGrid, List as ListIcon } from "lucide-react";
+
 import FileGrid from "../components/FileGrid";
 import FileList from "../components/FileList";
 import FileUploader from "../components/FileUploader";
@@ -27,62 +18,6 @@ interface File {
   uploadedAt: string;
   downloadUrl: string;
 }
-
-// Helper to check if a file is a folder (adjust as needed for your backend)
-const isFolder = (file: File) => file.name && !file.name.includes(".");
-
-// Helper to get a colored thumbnail for each file type
-const getFileThumb = (filename: string) => {
-  const ext = filename.split(".").pop()?.toLowerCase();
-  if (!ext)
-    return (
-      <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-gray-100">
-        <FileIcon size={40} className="text-gray-400" />
-      </div>
-    );
-  switch (ext) {
-    case "pdf":
-      return (
-        <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-red-500">
-          <span className="text-white text-3xl font-bold">PDF</span>
-        </div>
-      );
-    case "doc":
-    case "docx":
-      return (
-        <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-blue-500">
-          <span className="text-white text-3xl font-bold">DOCX</span>
-        </div>
-      );
-    case "xlsx":
-      return (
-        <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-green-500">
-          <span className="text-white text-3xl font-bold">XLSX</span>
-        </div>
-      );
-    case "jpg":
-    case "jpeg":
-    case "png":
-    case "gif":
-      return (
-        <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-blue-200">
-          <ImageIcon size={40} className="text-blue-500" />
-        </div>
-      );
-    case "txt":
-      return (
-        <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-gray-300">
-          <FileText size={40} className="text-gray-600" />
-        </div>
-      );
-    default:
-      return (
-        <div className="flex items-center justify-center w-full h-24 rounded-t-2xl bg-gray-100">
-          <FileIcon size={40} className="text-gray-400" />
-        </div>
-      );
-  }
-};
 
 const Dashboard = () => {
   const [files, setFiles] = useState<File[]>([]);

@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Search,
   HelpCircle,
   Settings,
   Menu as MenuIcon,
   X,
-  Grid3X3,
   RefreshCw,
 } from "lucide-react";
 import DriveIcon from "./icons/DriveIcon";
