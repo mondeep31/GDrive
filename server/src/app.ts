@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { CORS_CONFIG } from './config/config';
+// import { CORS_CONFIG } from './config/config';
 import session from 'express-session'
 import authRouter from './routes/auth';
 import './config/passport';
@@ -14,12 +14,20 @@ dotenv.config();
 
 const app = express();
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+const CORS_CONFIG = {
+    origin: ["http://localhost:5173", FRONTEND_URL],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use(cors(CORS_CONFIG));
 
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
 app.use(session({
     secret: process.env.SESSION_SECRET || 'your_secret',
     resave: false,
