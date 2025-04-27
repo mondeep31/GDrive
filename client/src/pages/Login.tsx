@@ -1,7 +1,7 @@
 import Button from "../components/ui/Button";
 const Login = () => {
   const BASE_URL = import.meta.env.VITE_AXIOS_BASE_URL;
-  // console.log(BASE_URL)
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md overflow-hidden">

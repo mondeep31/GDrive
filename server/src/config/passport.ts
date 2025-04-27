@@ -19,11 +19,7 @@ if (!CALLBACK_URL){
     throw new Error('Missing Callback URL in environment variables')
 }
 
-// console.log('OAuth Config:', {
-//   GOOGLE_CLIENT_ID,
-//   GOOGLE_CLIENT_SECRET,
-//   CALLBACK_URL
-// });
+
 
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,

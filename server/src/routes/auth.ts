@@ -23,7 +23,7 @@ authRouter.get('/me', (req, res) => {
 authRouter.get('/logout', (req: Request, res: Response) => {
   req.logout((err) => {
     if (err) return res.status(500).json({ message: 'Logout failed', error: err });
-    res.redirect(FRONTEND_URL);
+    res.json({ message: 'Logged out successfully' });
   });
 });
 
