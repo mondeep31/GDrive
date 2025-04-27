@@ -6,7 +6,10 @@ import Dashboard from "./pages/Dashboard";
 function App() {
   const { loading, isAuthenticated } = useAuth();
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>Loading, wait for server to start. Render free tier's issue.</div>
+    );
 
   return (
     <BrowserRouter>
