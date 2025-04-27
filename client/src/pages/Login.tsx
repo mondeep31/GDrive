@@ -40,6 +40,7 @@ const Login = () => {
             <p>
               Hi, I am currently using render's free tier due to which there
               might be an issue of cold start.
+              <br />
               <a
                 href="https://jet-clock-de6.notion.site/Problems-with-free-tier-deployment-1e2333ba479180bd8c90d485e27172a4"
                 target="_blank"
