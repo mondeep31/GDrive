@@ -35,6 +35,8 @@ const Login = () => {
             <div className="text-center text-sm text-gray-500">
               <p>Please authenticate yourself</p>
               <p>using your google account</p>
+              <p>Hi, I am currently using render's free tier due to which there might be an issue of cold start</p>
+              <p>Please wait some time till the server is up</p>
             </div>
           </div>
         </div>

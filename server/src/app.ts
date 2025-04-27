@@ -6,7 +6,6 @@ import session from 'express-session'
 import authRouter from './routes/auth';
 import './config/passport';
 import passport from 'passport';
-import { isAuthenticated } from './middleware/isAuthenticated';
 import fileRoutes from './routes/fileRoutes';
 
 dotenv.config();
@@ -19,11 +18,24 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 app.set('trust proxy', 1);
 
-const CORS_CONFIG = {
-    origin: ["http://localhost:5173", FRONTEND_URL],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-}
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL
+].filter(Boolean) as string[];
+
+export const CORS_CONFIG = {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    if (!origin) return callback(null, true); 
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
