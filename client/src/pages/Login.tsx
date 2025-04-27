@@ -22,11 +22,7 @@ const Login = () => {
             <Button
               variant="primary"
               fullWidth
-              onClick={() =>
-                (window.location.href = `${
-                  BASE_URL
-                }/auth/google`)
-              }
+              onClick={() => (window.location.href = `${BASE_URL}/auth/google`)}
               className="justify-center py-3"
             >
               Sign in with Google
@@ -35,15 +31,24 @@ const Login = () => {
             <div className="text-center text-sm text-gray-500">
               <p>Please authenticate yourself</p>
               <p>using your google account</p>
-              <p>Hi, I am currently using render's free tier due to which there might be an issue of cold start</p>
-              <p>Please wait some time till the server is up</p>
             </div>
           </div>
         </div>
 
         <div className="bg-gray-50 px-8 py-4 border-t">
           <p className="text-xs text-gray-500 text-center">
-            By signing in, you agree to our Terms of Service and Privacy Policy.
+            <p>
+              Hi, I am currently using render's free tier due to which there
+              might be an issue of cold start.
+              <a
+                href="https://jet-clock-de6.notion.site/Problems-with-free-tier-deployment-1e2333ba479180bd8c90d485e27172a4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Click here to find probable issues you might face
+              </a>
+            </p>
+            <p>Please wait some time till the server is up</p>.
           </p>
         </div>
       </div>

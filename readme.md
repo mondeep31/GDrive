@@ -1,11 +1,8 @@
-
-
 Note: There are some issues with deployment in free tier of Render, It is explained [here](https://jet-clock-de6.notion.site/Problems-with-free-tier-deployment-1e2333ba479180bd8c90d485e27172a4) for better understanding
 
-[Demo]()
----
+## [Demo](https://youtu.be/z9SHA9_OxHU)
 
-#  Google Drive Clone
+# Google Drive Clone
 
 This is a full-stack application that allows users to **sign in with Google**, **upload, manage, search, download, and share files**, similar to Google Drive.  
 Built using **React.js + Node.js (TypeScript)**, with **AWS S3** for storage and **MongoDB** for database.
@@ -30,6 +27,7 @@ Built using **React.js + Node.js (TypeScript)**, with **AWS S3** for storage and
 - Install [Docker](https://docs.docker.com/get-docker/)
 - Install [Docker Compose](https://docs.docker.com/compose/install/)
 - Install [Node.js](https://nodejs.org/)
+
 ---
 
 ### 1. Clone the repository
@@ -98,6 +96,7 @@ cd ../client
 ```bash
 npm install
 ```
+
 #### b. Create a `.env` file inside `/client`
 
 Use `.env.sample` as a reference:
@@ -204,19 +203,19 @@ npm run build
 
 ## 🔥 Final Environment Variables Summary
 
-| Key                    | Description                                  |
-|-------------------------|----------------------------------------------|
-| `PORT`                  | Backend running port                        |
-| `MONGODB_URI`           | MongoDB connection string                   |
-| `SESSION_SECRET`        | Session encryption secret key               |
-| `GOOGLE_CLIENT_ID`      | Google OAuth Client ID                      |
-| `GOOGLE_CLIENT_SECRET`  | Google OAuth Client Secret                  |
-| `CALLBACK_URL`          | Google OAuth redirect URL                   |
-| `FRONTEND_URL`          | Your deployed frontend URL                  |
-| `AWS_ACCESS_KEY_ID`     | AWS IAM Access Key                          |
-| `AWS_SECRET_ACCESS_KEY` | AWS IAM Secret Key                          |
-| `AWS_REGION`            | AWS region for your S3 bucket               |
-| `S3_BUCKET_NAME`        | Your S3 bucket name                         |
+| Key                     | Description                   |
+| ----------------------- | ----------------------------- |
+| `PORT`                  | Backend running port          |
+| `MONGODB_URI`           | MongoDB connection string     |
+| `SESSION_SECRET`        | Session encryption secret key |
+| `GOOGLE_CLIENT_ID`      | Google OAuth Client ID        |
+| `GOOGLE_CLIENT_SECRET`  | Google OAuth Client Secret    |
+| `CALLBACK_URL`          | Google OAuth redirect URL     |
+| `FRONTEND_URL`          | Your deployed frontend URL    |
+| `AWS_ACCESS_KEY_ID`     | AWS IAM Access Key            |
+| `AWS_SECRET_ACCESS_KEY` | AWS IAM Secret Key            |
+| `AWS_REGION`            | AWS region for your S3 bucket |
+| `S3_BUCKET_NAME`        | Your S3 bucket name           |
 
 ---
 
@@ -230,7 +229,7 @@ npm run build
 
 # 📸 Screenshots
 
-[Screenshots]()
+[Scroll down in this notion link to find screenshots](https://jet-clock-de6.notion.site/Problems-with-free-tier-deployment-1e2333ba479180bd8c90d485e27172a4)
 
 ---
 
@@ -239,5 +238,3 @@ npm run build
 Made with ❤️ by [Mondeep](https://github.com/mondeep31)
 
 ---
-
-
