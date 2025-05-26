@@ -7,40 +7,30 @@ import authRouter from './routes/auth';
 import './config/passport';
 import passport from 'passport';
 import fileRoutes from './routes/fileRoutes';
+import { CORS_CONFIG } from './config/config';
 
 dotenv.config();
 
 
 const app = express();
 
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}))
+
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 // console.log("app.ts FE URL", FRONTEND_URL)
 
 app.set('trust proxy', 1);
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  process.env.FRONTEND_URL
-].filter(Boolean) as string[];
-
-export const CORS_CONFIG = {
-  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
-    if (!origin) return callback(null, true); 
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-};
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use(cors(CORS_CONFIG));
+
 
 
 app.use(session({
